@@ -1,0 +1,1 @@
+export const GET_ALL_STARSHIPS = 'GET_ALL_STARSHIPS'
