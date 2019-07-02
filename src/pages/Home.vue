@@ -3,6 +3,10 @@
         <starship
             v-for="(starship, index) in starships"
             :key="`${index}`"
+            class="starship-element"
+            :isPuchased="isPuchasedStarship(starship.model)"
+            @buy-button-click="buyStarship"
+            @remove-button-click="removeStarship"
             :starship="starship"/>
     </div>
 </template>
@@ -40,6 +44,15 @@ export default {
       }).then((starships) => {
         this.starships = starships
       })
+    },
+    buyStarship (model) {
+      this.$store.commit(types['BUY_STARSHIP'], model)
+    },
+    removeStarship (model) {
+      this.$store.commit(types['REMOVE_STARSHIP'], model)
+    },
+    isPuchasedStarship (model) {
+      return this.$store.getters.getPurchasedStarshipsModels.includes(model)
     }
   },
   computed: {
@@ -57,7 +70,7 @@ export default {
         align-items: center;
     }
 
-    .shop-wrapper div {
+    .shop-wrapper .starship-element {
         width: 400px;
         margin-bottom: 1em;
     }
